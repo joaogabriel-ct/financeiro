@@ -75,17 +75,19 @@ const GastosTable = ({ salesData }) => {
 
   useEffect(() => {
     const calculateTotals = () => {
-      const filteredData = salesData.filter((row) => {
-        const bankMatch = filterBank ? row.banco.toLowerCase().includes(filterBank.toLowerCase()) : true;
-        const dateMatch = filterMonth ? new Date(row.data).getMonth() === parseInt(filterMonth, 10) : true;
-        return bankMatch && dateMatch;
-      });
+      if (salesData) { // Check if salesData is not null or undefined
+        const filteredData = salesData.filter((row) => {
+          const bankMatch = filterBank ? (row.banco || '').toLowerCase().includes(filterBank.toLowerCase()) : true;
+          const dateMatch = filterMonth ? new Date(row.data).getMonth() === parseInt(filterMonth, 10) : true;
+          return bankMatch && dateMatch;
+        });
 
-      // Calcula a soma total dos valores filtrados
-      const sum = filteredData.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
-      setTotalSum(sum);
+        // Calcula a soma total dos valores filtrados
+        const sum = filteredData.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
+        setTotalSum(sum);
 
-      setFilteredData(filteredData);
+        setFilteredData(filteredData);
+      }
     };
 
     calculateTotals();
@@ -100,7 +102,7 @@ const GastosTable = ({ salesData }) => {
   };
 
   // Obtém uma lista de meses únicos dos dados de vendas
-  const uniqueMonths = Array.from(new Set(salesData.map(row => new Date(row.data).getMonth())));
+  const uniqueMonths = Array.from(new Set(salesData?.map(row => new Date(row.data).getMonth())));
   const monthOptions = uniqueMonths.map((month, index) => (
     <option key={index} value={month}>{new Date(0, month).toLocaleDateString('pt-BR', { month: 'long' })}</option>
   ));
@@ -112,11 +114,11 @@ const GastosTable = ({ salesData }) => {
 
   return (
     <div className="justify-center items-center m-4">
-      <h2 className=" bg-white text-xl text-blue-600 font-bold text-center mb-4">
+      <h2 className=" text-4xl text-blue-600 font-bold text-center mb-4">
         Tabela de gastos mensais
       </h2>
 
-      <div className="flex space-x-4 mb-4">
+      <div className="flex justify-center items-center space-x-4 mb-4">
         <input
           type="text"
           placeholder="Filtrar por banco..."
@@ -132,7 +134,7 @@ const GastosTable = ({ salesData }) => {
           <option value="">Selecione o mês</option>
           {monthOptions}
         </select>
-      
+
         <p className="text-2xl font-bold">Valor Total:</p>
         <p className="text-2xl font-bold">R$ {totalSum.toFixed(2)}</p>
       </div>

@@ -17,8 +17,8 @@ function Gastos() {
 
     return (
         <div>
-            <div>
-                <GastosTable salesData={data} />
+            <div >
+                <GastosTable salesData={data.transacoes} />
             </div>
         </div>
     );

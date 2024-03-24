@@ -87,54 +87,68 @@ const ChartComponent = ({ salesData, revenueData }) => {
     ));
 
     return (
-        <div className="justify-center items-center m-4">
-            <div className="w-full md:w-1/2"> {/* Ocupa metade da tela em dispositivos maiores */}
-                <h2 className="bg-white text-xl text-blue-600 font-bold text-center mb-4">
-                    Gráfico de gastos
-                </h2>
-
-                <div className="flex space-x-4 mb-4">
-                    <input
-                        type="text"
-                        placeholder="Filtrar por banco..."
-                        value={filterBank}
-                        onChange={handleFilterBankChange}
-                        className="border text-black border-gray-300 rounded-md p-2"
-                    />
-                    <select
-                        value={filterMonth}
-                        onChange={handleFilterMonthChange}
-                        className="border text-black border-gray-300 rounded-md p-2"
-                    >
-                        <option value="">Selecione o mês</option>
-                        {monthOptions}
-                    </select>
-                </div>
-                <div className="flex space-x-4 mb-4">
-                    <p className="text-2xl font-bold">Valor Total Gastos:</p>
-                    <p className="text-2xl font-bold">R$ {totalSalesSum.toFixed(2)}</p>
-                </div>
-
-                <div className="mb-4 w-full h-1/4"> {/* Ocupa a largura total */}
-                    <canvas id="salesChart"></canvas>
-                </div>
+        <div className="container">
+            <div className="flex justify-center items-center space-x-4 mb-4">
+                <input
+                    type="text"
+                    placeholder="Filtrar por banco..."
+                    value={filterBank}
+                    onChange={handleFilterBankChange}
+                    className="border text-black border-gray-300 rounded-md p-2"
+                />
+                <select
+                    value={filterMonth}
+                    onChange={handleFilterMonthChange}
+                    className="border text-black border-gray-300 rounded-md p-2"
+                >
+                    <option value="">Selecione o mês</option>
+                    {monthOptions}
+                </select>
             </div>
+            <div className="grid grid-cols-2 gap-2">
+                <div className="col-md-6">
+                    <div className="justify-center items-center m-4">
+                        <div className="w-full"> {/* Ocupa toda a largura na tela */}
+                            <h2 className="bg-white text-xl text-blue-600 font-bold text-center mb-4">
+                                Gráfico de gastos
+                            </h2>
 
-            <div className="w-full md:w-1/2"> {/* Ocupa metade da tela em dispositivos maiores */}
-                <h2 className="bg-white text-xl text-blue-600 font-bold text-center mb-4">
-                    Gráfico de receitas
-                </h2>
 
-                <div className="flex space-x-4 mb-4">
-                    <p className="text-2xl font-bold">Valor Total Receitas:</p>
-                    <p className="text-2xl font-bold">R$ {totalRevenueSum.toFixed(2)}</p>
+                            <div className="flex space-x-4 mb-4">
+                                <p className="text-2xl font-bold">Valor Total Gastos:</p>
+                                <p className="text-2xl font-bold">R$ {totalSalesSum.toFixed(2)}</p>
+                            </div>
+
+                            <div className="mb-4 w-full h-1/4"> {/* Ocupa a largura total */}
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div className="col-md-6">
+                    <div className="justify-center items-center m-4">
+                        <div className="w-full"> {/* Ocupa toda a largura na tela */}
+                            <h2 className="bg-white text-xl text-blue-600 font-bold text-center mb-4">
+                                Gráfico de receitas
+                            </h2>
 
-                <div className="mb-4 w-full h-1/4"> {/* Ocupa a largura total */}
-                    <canvas id="revenueChart"></canvas>
+                            <div className="flex space-x-4 mb-4">
+                                <p className="text-2xl font-bold">Valor Total Receitas:</p>
+                                <p className="text-2xl font-bold">R$ {totalRevenueSum.toFixed(2)}</p>
+                            </div>
+
+                            <div className="mb-4 w-full h-1/4"> {/* Ocupa a largura total */}
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
     );
 };
 

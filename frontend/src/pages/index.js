@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ChartComponent from "@/components/charts";
+import Buttons from "@/components/buttons";
 
 
 function Principal() {
@@ -19,8 +20,12 @@ function Principal() {
     }, []);
 
     return (
-        <div>
-            <div>
+        <div className="container">
+            <div className="col-md-6">
+                <Buttons/>
+            </div>
+            <div className="col-md-6">
+
                 <ChartComponent salesData={data} revenueData={receita}/>
             </div>
         </div>
