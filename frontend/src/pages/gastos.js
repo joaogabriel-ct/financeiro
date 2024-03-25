@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GastosTable from "@/components/tableGastos";
+import Buttons from "@/components/buttons";
 
 function Gastos() {
     const [data, setData] = useState([]);
@@ -16,8 +17,12 @@ function Gastos() {
     }, []);
 
     return (
-        <div>
-            <div >
+        <div className="container">
+            <div className="col-md-6">
+                <Buttons />
+            </div>
+            <div className="col-md-6">
+
                 <GastosTable salesData={data.transacoes} />
             </div>
         </div>
